@@ -45,6 +45,14 @@ console.log(`${centi} cm is equal to ${kilo} km`)
 // Example : 1000 → “Rp. 1.000,00”
 
 let currencyNum: number = 1000
+let covertedCur: string;
+let convertToString: string = currencyNum.toString().replace('.', ',')
+let convertedCur: string = convertToString.replace(/\B(?=(\d{3})+(?!\d))/g, ".") //regular expression to separate each 3 of character
+if (currencyNum % 1 === 0) {
+    convertedCur = convertedCur + ',00'
+}
+
+console.log(`Rp. ${convertedCur},`)
 
 // Write a code to remove the first occurrence of a given “search string” from a string
 // Example : string = “Hello world”, search string = “ell” → “Ho world”
@@ -58,9 +66,12 @@ console.log(wordProcessor);
 // Example : “hello world” → “Hello World”
 
 let wordContender: string = "hello world!";
-let capitalize: string = wordContender.replace("h","H").replace("w", "W");
+let wordSplit = wordContender.split(' ');
+let splitWord1 = wordSplit[0][0].toUpperCase() + wordSplit[0].slice(1)
+let splitWord2 = wordSplit[1][0].toUpperCase() + wordSplit[1].slice(1)
+let capitalized = `${splitWord1} ${splitWord2}`
 
-console.log(capitalize);
+console.log(capitalized);
 
 // Write a code to swap the case of each character from string 
 // Example : ‘The QuiCk BrOwN Fox’ -> ‘ tHE qUIcK bRoWn fOX’
@@ -70,11 +81,10 @@ let modified = ""
 
 for (let i = 0; i < sentence.length; i++) {
     if (sentence[i] === sentence[i].toUpperCase()) {
-        modified = sentence[i].toLowerCase()
+        modified = modified + sentence[i].toLowerCase()
     } else {
-        modified = sentence[i].toUpperCase()
+        modified = modified + sentence[i].toUpperCase()
     } 
-    modified += sentence[i]
 }
 
 console.log(modified);
@@ -134,18 +144,6 @@ if (typeof input === "string") {
 // Example : ‘An apple a day keeps the doctor away’ -> `*n *pple * d*y keeps the doctor *w*y`
 
 let quotes: string = "An apple a day keeps the doctor away"
-let replaced = quotes.replace(/a/g, "*").replace("A", "*");
+let replaced = quotes.replace(/[Aa]/g, "*");
 
 console.log(replaced)
-
-
-
-function alter(string: string) {
-    var newString = ''
-    for (var i = 0; i < string.length; i++) {
-      newString += string[i] === string[i].toUpperCase() ? string[i].toLowerCase() : string[i].toUpperCase()
-    }
-    return newString
-}
-
-console.log(alter("AlaBaMa"))
